@@ -1,5 +1,6 @@
 <?php
 
+use App\Jobs\ListOfFavorites;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,10 +15,18 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::prefix('/favorites')->group(function () {
+    Route::get('/', 'FavoritesController@index')->name('favorites');
+    Route::post('/add', 'FavoritesController@add')->name('add.favorite');
+    Route::delete('/remove', 'FavoritesController@remove')->name('remove.favorite');
+});
+
+Route::get('envio-email', function(){
+    $user = Auth::user();
+
+    ListOfFavorites::dispatch($user)->delay(now()->addMinutes(2));
+});
