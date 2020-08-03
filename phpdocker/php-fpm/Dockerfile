@@ -8,3 +8,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     && apt-get -y --no-install-recommends install  php7.4-mysql php-redis php-xdebug \
     && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
+
+# Install NodeJS and NPM
+RUN apt-get update \
+    && apt-get -y install nodejs \
+    && apt-get -y install npm
