@@ -18,10 +18,12 @@ class RouteServiceProvider extends ServiceProvider
 
     /**
      * The path to the "home" route for your application.
+     * The path to the "favorites" route for your application.
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = '/';
+    public const FAVORITES = '/favorites';
 
     /**
      * Define your route model bindings, pattern filters, etc.
